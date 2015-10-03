@@ -18,6 +18,11 @@ public class AkkaInitializer {
 
 	// only for subscription purposes
 	private ActorRef denomalizer = null;
+	
+	// Akka configuration values
+	private final String BROKER_URL = "akka.tcp://AKKAREMOTESystem@192.168.99.101:2555/user/brokerWorker";
+	
+	
 
 	public void subscribeActors() {
 
@@ -26,11 +31,11 @@ public class AkkaInitializer {
 		// Subscribe the reading worker
 		if (this.denomalizer != null) {
 			
-			ActorSelection messageBrokerFinder = 
+			ActorSelection messageBrokerFinder =
 					AkkaFactory.getActorSystem(SystemType.REMOTE)
-					.actorSelection("akka.tcp://AKKAREMOTESystem@127.0.0.1:2553/user/brokerWorker");
+					.actorSelection(BROKER_URL);
 			
-			//ask broker to subscribe denomalizer
+			// ask broker to subscribe denomalizer
 			messageBrokerFinder.tell(denomalizer, denomalizer);
 			
 			System.out.println("[messageBrokerFinder] Actor reference: " + messageBrokerFinder.toString());

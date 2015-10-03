@@ -13,13 +13,14 @@ import com.nshimiye.akka.AkkaInitializer;
 public class Application {
 
     public static void main(String[] args) {
+    	SpringApplication.run(Application.class, args);
     	
     	// create the actor system, actors, and perform any
     	// subscription needed
     	AkkaInitializer init = new AkkaInitializer();
     	init.subscribeActors();
     	
-        SpringApplication.run(Application.class, args);
+        
     }
 
 }
